@@ -4,8 +4,12 @@ Jiggly-legged lunar lander project... enjoy!
 
 Clones of this are at:
 
-bitbucket.org/kurtdekker/jiggly_lander
+https://bitbucket.org/kurtdekker/jiggly_lander
 
-github.com/kurtdekker/jiggly_lander
+https://github.com/kurtdekker/jiggly_lander
+
+Quick video here:
+
+https://youtu.be/yTHY__gyWGo
 
 Have fun with it all.
