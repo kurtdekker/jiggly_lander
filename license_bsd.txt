@@ -1,11 +1,10 @@
-﻿/*
-    The following license supersedes all notices in the source code.
+/*
+    The following license supersedes all notices in the source
+    code.
 */
 
 /*
     Copyright (c) 2017 Kurt Dekker/PLBM Games All rights reserved.
-
-    http://www.twitter.com/kurtdekker
     
     Redistribution and use in source and binary forms, with or without
     modification, are permitted provided that the following conditions are
@@ -34,18 +33,3 @@
     NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-
-using UnityEngine;
-using System.Collections;
-
-public class SkidVisualizer : MonoBehaviour
-{
-	public Transform LanderRoot;
-	public Transform SkidRoot;
-
-	void LateUpdate ()
-	{
-		transform.position = SkidRoot.position;
-		transform.rotation = LanderRoot.rotation * Quaternion.Euler( 90, 0, 0);
-	}
-}
