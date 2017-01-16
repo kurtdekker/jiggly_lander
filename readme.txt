@@ -8,8 +8,9 @@ https://bitbucket.org/kurtdekker/jiggly_lander
 
 https://github.com/kurtdekker/jiggly_lander
 
-Quick video here:
+Quick videos here:
 
 https://youtu.be/yTHY__gyWGo
+https://youtu.be/dagy5o2A__Y
 
 Have fun with it all.
