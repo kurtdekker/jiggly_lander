@@ -62,17 +62,33 @@ public class Thruster : MonoBehaviour
 
 	public Engine[] engines;
 
+	// for synthesizing engine noise instead of using the WAV file
+	public bool useSynthesizedEngineNoise = true;
+
+	public AnimationCurve EngineVolume;
+	public AnimationCurve EnginePitch;
+
+	Noise1[] engineNoises;
+
 	Rigidbody rb;
 
 	void Start()
 	{
 		rb = GetComponent<Rigidbody> ();
+
+		engineNoises = new Noise1[ engines.Length];
+		for (int i = 0; i < engineNoises.Length; i++)
+		{
+			engineNoises[i] = Noise1.Create ();
+			engineNoises[i].volume = 0;
+		}
 	}
 
 	void Update()
 	{
-		foreach( Engine e in engines)
+		for (int i = 0; i < engines.Length; i++)
 		{
+			Engine e = engines[i];
 			if (Input.GetKey ( e.key) || Input.GetKey ( KeyForBothEngines))
 			{
 				if (RampUpTime > 0)
@@ -110,10 +126,18 @@ public class Thruster : MonoBehaviour
 				ps.emissionRate = 250 * e.currentFraction;
 			}
 
-			AudioSource[] azes = e.tr.GetComponentsInChildren<AudioSource>();
-			foreach( var az in azes)
+			if (useSynthesizedEngineNoise)
 			{
-				az.volume = e.currentFraction;
+				engineNoises[i].volume = EngineVolume.Evaluate( e.currentFraction);
+				engineNoises[i].frequency = EnginePitch.Evaluate( e.currentFraction);
+			}
+			else
+			{
+				AudioSource[] azes = e.tr.GetComponentsInChildren<AudioSource>();
+				foreach( var az in azes)
+				{
+					az.volume = e.currentFraction;
+				}
 			}
 
 			rb.AddForceAtPosition( transform.up * e.nominalPower * e.currentFraction, e.tr.position);

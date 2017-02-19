@@ -350,6 +350,37 @@ MonoBehaviour:
     tr: {fileID: 1545185927}
     nominalPower: 120
     currentFraction: 0
+  useSynthesizedEngineNoise: 1
+  EngineVolume:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: .802504897
+      outSlope: .802504897
+      tangentMode: 0
+    - time: 1
+      value: .300000012
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 1
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  EnginePitch:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 500
+      inSlope: 1500
+      outSlope: 1500
+      tangentMode: 10
+    - time: 1
+      value: 2000
+      inSlope: 1500
+      outSlope: 1500
+      tangentMode: 10
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!114 &468468283
 MonoBehaviour:
   m_ObjectHideFlags: 0
