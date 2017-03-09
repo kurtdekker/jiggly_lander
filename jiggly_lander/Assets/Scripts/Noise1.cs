@@ -121,7 +121,6 @@ public class Noise1 : MonoBehaviour
 		int count = __data.Length;
 		int samples = count / __channels;
 
-		int j = 0;
 		for( int i = 0; i < samples; i++)
 		{
 			if (noisePhase < 1.0f)
