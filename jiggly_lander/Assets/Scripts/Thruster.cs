@@ -3,7 +3,7 @@
 */
 
 /*
-    Copyright (c) 2017 Kurt Dekker/PLBM Games All rights reserved.
+    Copyright (c) 2018 Kurt Dekker/PLBM Games All rights reserved.
 
     http://www.twitter.com/kurtdekker
     
@@ -84,7 +84,7 @@ public class Thruster : MonoBehaviour
 		}
 	}
 
-	void Update()
+	void GetKeyboardInput()
 	{
 		for (int i = 0; i < engines.Length; i++)
 		{
@@ -119,6 +119,49 @@ public class Thruster : MonoBehaviour
 					e.currentFraction = 0;
 				}
 			}
+		}
+	}
+
+	void GetMouseInput()
+	{
+		// quick-and-dirty one-finger control
+		Vector3 mousePos = Input.mousePosition;
+
+		float halfWidth = Screen.width / 2;
+
+		// sense either in the left half (which is both left and right directions),
+		// or in the right half (also full deflection left/right)
+		float x = mousePos.x;
+		if (x >= halfWidth) x -= halfWidth;
+
+		float fraction = x / halfWidth;
+
+		float power = mousePos.y / (Screen.height / 2);
+
+		if (power > 1)
+		{
+			power = 1;
+		}
+
+		var LeftEngine = engines[0];
+		var RightEngine = engines[1];
+
+		if (LeftEngine.tr.position.x > RightEngine.tr.position.x)
+		{
+			var tempEngine = LeftEngine;
+			LeftEngine = RightEngine;
+			RightEngine = tempEngine;
+		}
+
+		LeftEngine.currentFraction = (1.0f - fraction) * power;
+		RightEngine.currentFraction = fraction * power;
+	}
+
+	void RunEngines()
+	{
+		for (int i = 0; i < engines.Length; i++)
+		{
+			Engine e = engines[i];
 
 			ParticleSystem[] pses = e.tr.GetComponentsInChildren<ParticleSystem>();
 			foreach( var ps in pses)
@@ -142,5 +185,19 @@ public class Thruster : MonoBehaviour
 
 			rb.AddForceAtPosition( transform.up * e.nominalPower * e.currentFraction, e.tr.position);
 		}
+	}
+
+	void Update()
+	{
+		if (Input.GetMouseButton(0))
+		{
+			GetMouseInput();
+		}
+		else
+		{
+			GetKeyboardInput();
+		}
+
+		RunEngines();
 	}
 }
